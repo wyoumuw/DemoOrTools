@@ -1,66 +1,70 @@
 package com.youmu.maven.utils.reflection;
 
+import com.youmu.maven.utils.reflection.utils.YoumuReflectionUtil;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 实体定义类
  */
 public class BeanDefine {
-    private Class clazz;
-    private String fullClassName;
-    private Constructor[] constructors;
-    private Field[] fields;
-    private MethodDecorator[] methods;
+    private final Class clazz;
+    private final String fullClassName;
+    private final Constructor[] constructors;
+    private final Map<String,Field> fields;
+    private final Map<String,MethodDecorator> methods;
+
+    public BeanDefine(Class clazz, String fullClassName, Constructor[] constructors, Field[] fields, MethodDecorator[] methods) {
+        this.clazz = clazz;
+        this.fullClassName = fullClassName;
+        this.constructors = constructors;
+        this.fields=new HashMap<String,Field>();
+        for (Field field : fields) {
+            this.fields.put(field.getName(),field);
+        }
+        this.methods=new HashMap<String,MethodDecorator>();
+        for (MethodDecorator method : methods) {
+            this.methods.put(YoumuReflectionUtil.generFullMethodName(method.getMethod()),method);
+        }
+    }
+
+    public BeanDefine(Class clazz, String fullClassName, Constructor[] constructors, Field[] fields,Method[] methods) {
+        this.clazz = clazz;
+        this.fullClassName = fullClassName;
+        this.constructors = constructors;
+        this.fields=new HashMap<String,Field>();
+        for (Field field : fields) {
+            this.fields.put(field.getName(),field);
+        }
+        this.methods=new HashMap<String,MethodDecorator>();
+        for (Method method : methods) {
+            this.methods.put(YoumuReflectionUtil.generFullMethodName(method),new MethodDecorator(method));
+        }
+    }
 
     public String getFullClassName() {
         return fullClassName;
     }
 
-    public void setFullClassName(String fullClassName) {
-        this.fullClassName = fullClassName;
-    }
 
     public Constructor[] getConstructors() {
         return constructors;
     }
 
-    public void setConstructors(Constructor[] constructors) {
-        this.constructors = constructors;
-    }
-
-    public Field[] getFields() {
+    public Map<String, Field> getFields() {
         return fields;
     }
 
-    public void setFields(Field[] fields) {
-        this.fields = fields;
-    }
-
-    public MethodDecorator[] getMethods() {
+    public Map<String, MethodDecorator> getMethods() {
         return methods;
-    }
-
-    public void setMethods(MethodDecorator[] methods) {
-        this.methods = methods;
     }
 
     public Class getClazz() {
         return clazz;
     }
 
-    public void setClazz(Class clazz) {
-        this.clazz = clazz;
-    }
-
-    public void setMethods(Method[] methods) {
-        if (null == methods) {
-            return;
-        }
-        this.methods = new MethodDecorator[methods.length];
-        for (int i = 0; i < methods.length; i++) {
-            this.methods[i] = new MethodDecorator(methods[i]);
-        }
-    }
 }

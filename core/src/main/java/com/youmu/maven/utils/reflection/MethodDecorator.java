@@ -6,8 +6,8 @@ import java.lang.reflect.Method;
 
 
 public class MethodDecorator {
-        private Method method;
-        private String methodNameWithParameters;
+        private final  Method method;
+        private final  String methodNameWithParameters;
 
         public MethodDecorator(Method method) {
             this.method=method;
@@ -18,16 +18,9 @@ public class MethodDecorator {
             return method;
         }
 
-        public void setMethod(Method method) {
-            this.method = method;
-        }
 
         public String getMethodNameWithParameters() {
             return methodNameWithParameters;
-        }
-
-        public void setMethodNameWithParameters(String methodNameWithParameters) {
-            this.methodNameWithParameters = methodNameWithParameters;
         }
 
         public boolean isSameMethod(Method method){

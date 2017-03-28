@@ -1,5 +1,7 @@
 package com.youmu.maven.utils.reflection;
 
+import com.youmu.maven.utils.reflection.utils.YoumuReflectionUtil;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -63,12 +65,7 @@ public abstract class BeanUtil {
             if(cache.containsKey(clazz)&&!override){
                 return cache.get(clazz);
             }
-            bd = new BeanDefine();
-            bd.setClazz(clazz);
-            bd.setFullClassName(clazz.getName());
-            bd.setConstructors(clazz.getConstructors());
-            bd.setMethods(clazz.getMethods());
-            bd.setFields(clazz.getFields());
+            bd = new BeanDefine(clazz,clazz.getName(),clazz.getDeclaredConstructors(), YoumuReflectionUtil.getAllFields(clazz),YoumuReflectionUtil.getAllMethods(clazz));
             cache.put(clazz, bd);
         }
         return bd;
@@ -84,13 +81,8 @@ public abstract class BeanUtil {
      */
     public static Method getMethod(Class<?> clazz, String methodName, Class ...args){
         BeanDefine bd=getBeanDefine(clazz);
-        MethodDecorator[] methods=bd.getMethods();
-        for(MethodDecorator method:methods){
-                if(method.isSameMethod(methodName,args)){
-                    return method.getMethod();
-                }
-        }
-        return null;
+        MethodDecorator methodDecorator=bd.getMethods().get(YoumuReflectionUtil.generFullMethodName(methodName,args));
+        return null==methodDecorator?null:methodDecorator.getMethod();
     }
     /**
      * 获取一个空参数方法
@@ -105,20 +97,15 @@ public abstract class BeanUtil {
     /********************************以下属于获取属性的方法****************************/
     public static Field getField(Class<?> clazz, String fieldName){
         BeanDefine bd=getBeanDefine(clazz);
-        Field[] fields=bd.getFields();
-        for(Field field:fields){
-            if(field.getName().equals(fieldName)){
-                return field;
-            }
-        }
-        return null;
+
+        return bd.getFields().get(fieldName);
     }
 
     public static <T> T getFieldValue(Object target, String fieldName){
         T rtn=null;
         try {
             rtn= (T) getField(target.getClass(),fieldName).get(target);
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
