@@ -101,14 +101,9 @@ public abstract class BeanUtil {
         return bd.getFields().get(fieldName);
     }
 
-    public static <T> T getFieldValue(Object target, String fieldName){
+    public static <T> T getFieldValue(Object target, String fieldName) throws IllegalAccessException {
         T rtn=null;
-        try {
-            rtn= (T) getField(target.getClass(),fieldName).get(target);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        rtn= (T) getField(target.getClass(),fieldName).get(target);
         return rtn;
     }
 

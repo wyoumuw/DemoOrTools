@@ -9,6 +9,7 @@
         <module>ehcache_demo</module>
         <module>jdbc_demo</module>
         <module>Core</module>
+        <module>wechat</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -20,6 +21,8 @@
     </properties>
 
     <dependencies>
+
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
