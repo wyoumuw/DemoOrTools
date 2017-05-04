@@ -143,4 +143,17 @@ public class ReflectionTest {
         }
         System.out.println(System.currentTimeMillis()-start+"ms");
     }
+
+    @Test
+    public void testConstructor() throws Throwable{
+        TestEntity[] e=new TestEntity[110000];
+        long start=System.currentTimeMillis();
+
+        for(int i=0;i<110000;i++) {
+           // e[i]=new TestEntity();
+            //
+            e[i]=TestEntity.class.newInstance();
+        }
+        System.out.println(System.currentTimeMillis()-start+"ms");
+    }
 }

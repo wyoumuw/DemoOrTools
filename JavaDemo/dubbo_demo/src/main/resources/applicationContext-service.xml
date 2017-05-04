@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                          http://code.alibabatech.com/schema/dubbo  http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="dubbo-service"></dubbo:application>
+    <bean id="weatherService" class="com.youmu.maven.dubbo.service.impl.WeatherServiceImpl"/>
+    <dubbo:protocol name="dubbo" port="10111"/>
+    <import resource="applicationContext-zk.xml"/>
+    <dubbo:service interface="com.youmu.maven.dubbo.service.WeatherService" ref="weatherService"/>
+</beans>
