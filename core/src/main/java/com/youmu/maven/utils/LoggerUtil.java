@@ -1,4 +1,4 @@
-package com.youmu.maven.utils.reflection;
+package com.youmu.maven.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

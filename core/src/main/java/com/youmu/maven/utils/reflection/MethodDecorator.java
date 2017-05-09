@@ -8,10 +8,11 @@ import java.lang.reflect.Method;
 public class MethodDecorator {
         private final  Method method;
         private final  String methodNameWithParameters;
-
+        private final Class[] parameterTypes;
         public MethodDecorator(Method method) {
             this.method=method;
-            methodNameWithParameters= YoumuReflectionUtil.generFullMethodName(method);
+            this.parameterTypes=method.getParameterTypes();
+            methodNameWithParameters= YoumuReflectionUtil.generFullMethodName(method.getName(),this.parameterTypes);
         }
 
         public Method getMethod() {
@@ -29,5 +30,9 @@ public class MethodDecorator {
 
         public boolean isSameMethod(String methodName,Class ...parameterTypes){
             return YoumuReflectionUtil.generFullMethodName(methodName,parameterTypes).equals(getMethodNameWithParameters());
+        }
+
+        public Class[] getParameterTypes(){
+            return this.parameterTypes;
         }
     }

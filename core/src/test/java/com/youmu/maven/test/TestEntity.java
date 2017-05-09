@@ -25,4 +25,12 @@ public class TestEntity extends BaseObject{
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "TestEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", publicStr='" + publicStr + '\'' +
+                '}';
+    }
 }

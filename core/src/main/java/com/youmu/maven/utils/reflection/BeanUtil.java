@@ -85,15 +85,19 @@ public abstract class BeanUtil {
         return null==methodDecorator?null:methodDecorator.getMethod();
     }
     /**
-     * 获取一个空参数方法
+     * 获取一个方法的包装类
      * @param clazz 哪个类
      * @param methodName 方法名
-     * @return 方法
+     * @param args 参数
+     * @return 方法的包装类
      *
      */
-    public static Method getMethod(Class<?> clazz, String methodName){
-        return getMethod(clazz,methodName,null);
+    public static MethodDecorator getMethodDecorator(Class<?> clazz, String methodName, Class ...args){
+        BeanDefine bd=getBeanDefine(clazz);
+        return bd.getMethods().get(YoumuReflectionUtil.generFullMethodName(methodName,args));
     }
+
+
     /********************************以下属于获取属性的方法****************************/
     public static Field getField(Class<?> clazz, String fieldName){
         BeanDefine bd=getBeanDefine(clazz);

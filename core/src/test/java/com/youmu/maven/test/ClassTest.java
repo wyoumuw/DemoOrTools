@@ -11,13 +11,13 @@ public class ClassTest {
      @Test
     public void testInterface() throws Throwable{
          A a=new A();
-         FileOutputStream fileOutputStream=new FileOutputStream(new File("D:\\a.txt"));
+         FileOutputStream fileOutputStream=new FileOutputStream(new File("E:\\a.txt"));
          ObjectOutputStream oos=new ObjectOutputStream(fileOutputStream);
          oos.writeObject(a);
          oos.flush();
          oos.close();
 
-         FileInputStream fileInputStream=new FileInputStream(new File("D:\\a.txt"));
+         FileInputStream fileInputStream=new FileInputStream(new File("E:\\a.txt"));
          ObjectInputStream objectInputStream=new ObjectInputStream(fileInputStream);
          Object obj=objectInputStream.readObject();
 

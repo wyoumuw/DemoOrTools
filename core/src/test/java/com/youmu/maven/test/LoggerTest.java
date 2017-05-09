@@ -1,6 +1,6 @@
 package com.youmu.maven.test;
 
-import com.youmu.maven.utils.reflection.LoggerUtil;
+import com.youmu.maven.utils.LoggerUtil;
 import org.junit.Test;
 
 /**
