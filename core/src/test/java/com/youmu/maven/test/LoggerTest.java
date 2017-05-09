@@ -10,7 +10,7 @@ public class LoggerTest {
 
     @Test
     public void log(){
-        LoggerUtil.getLogger().debug("aas");
+        LoggerUtil.getLogger().debug("11111");
 
 
     }
