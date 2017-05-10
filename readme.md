@@ -1,4 +1,4 @@
-**Updates:**
+**Updates111:**
 
 2017-3-28 19:00:00:add core to project,there're added StringUtil,CollectionUtil,ArrayUtil and BeanUtil utils.
 
