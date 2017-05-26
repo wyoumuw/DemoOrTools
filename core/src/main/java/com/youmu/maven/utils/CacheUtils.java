@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class CacheUtil {
+public class CacheUtils {
 
 	public static class CacheBuilder {
 		private Long expireTime = (long) 180000;

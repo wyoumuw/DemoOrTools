@@ -1,6 +1,6 @@
 package com.youmu.maven.utils.reflection;
 
-import com.youmu.maven.utils.reflection.utils.YoumuReflectionUtil;
+import com.youmu.maven.utils.reflection.utils.YoumuReflectionUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -28,7 +28,7 @@ public class BeanDefine {
         }
         this.methods=new HashMap<String,MethodDecorator>();
         for (MethodDecorator method : methods) {
-            this.methods.put(YoumuReflectionUtil.generFullMethodName(method.getMethod()),method);
+            this.methods.put(YoumuReflectionUtils.generFullMethodName(method.getMethod()),method);
         }
     }
 
@@ -42,7 +42,7 @@ public class BeanDefine {
         }
         this.methods=new HashMap<String,MethodDecorator>();
         for (Method method : methods) {
-            this.methods.put(YoumuReflectionUtil.generFullMethodName(method),new MethodDecorator(method));
+            this.methods.put(YoumuReflectionUtils.generFullMethodName(method),new MethodDecorator(method));
         }
     }
 

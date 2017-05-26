@@ -1,9 +1,9 @@
 package com.youmu.maven.support;
 
 
-import com.youmu.maven.utils.ArrayUtil;
-import com.youmu.maven.utils.StringUtil;
-import com.youmu.maven.utils.reflection.BeanUtil;
+import com.youmu.maven.utils.ArrayUtils;
+import com.youmu.maven.utils.StringUtils;
+import com.youmu.maven.utils.reflection.BeanUtils;
 import org.apache.lucene.document.*;
 import org.springframework.core.convert.converter.Converter;
 
@@ -35,7 +35,7 @@ public abstract class DocumentConverter<S> implements Converter<S, Document> {
         if (!isInitialized) {
             initial(source.getClass());
         }
-        if (!ArrayUtil.isEmpty(fields)) {
+        if (!ArrayUtils.isEmpty(fields)) {
             initial(source.getClass());
             for (int i = 0; i < fields.length; i++) {
                 try {
@@ -59,7 +59,7 @@ public abstract class DocumentConverter<S> implements Converter<S, Document> {
         String[] strings = fieldStr.split(defaultSplitor);
         Field.Store store = Field.Store.YES;
         Field result = null;
-        if (!ArrayUtil.isEmpty(strings)) {
+        if (!ArrayUtils.isEmpty(strings)) {
             if (strings.length == 3 && falseStr.equals(strings[2])) {
                 store = Field.Store.NO;
             }
@@ -94,13 +94,13 @@ public abstract class DocumentConverter<S> implements Converter<S, Document> {
 
     public void initial(Class clazz) {
         String[] fields = getFieldNames();
-        if (!ArrayUtil.isEmpty(fields)) {
+        if (!ArrayUtils.isEmpty(fields)) {
             this.fields = new java.lang.reflect.Field[fields.length];
             this.methods = new Method[fields.length];
             for (int i = 0; i < fields.length; i++) {
                 String[] strings = fields[i].split(defaultSplitor);
-                this.fields[i] = BeanUtil.getField(clazz, strings[0]);
-                this.methods[i] = BeanUtil.getMethod(clazz, StringUtil.toGetterMethodName(strings[0]));
+                this.fields[i] = BeanUtils.getField(clazz, strings[0]);
+                this.methods[i] = BeanUtils.getMethod(clazz, StringUtils.toGetterMethodName(strings[0]));
             }
         }
         isInitialized = true;

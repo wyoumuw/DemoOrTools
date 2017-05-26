@@ -1,7 +1,7 @@
 package com.youmu.maven.test;
 
 import com.youmu.maven.utils.reflection.BeanDefine;
-import com.youmu.maven.utils.reflection.BeanUtil;
+import com.youmu.maven.utils.reflection.BeanUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,22 +26,22 @@ public class ReflectionTest {
     public void testMethod()throws Throwable{
         long start=System.currentTimeMillis();
 
-        Method method= BeanUtil.getMethod(TestEntity.class,"getName");
+        Method method= BeanUtils.getMethod(TestEntity.class,"getName");
         System.out.println(System.currentTimeMillis()-start+"ms");
         System.out.println(method.invoke(testEntity).toString());
 
         start=System.currentTimeMillis();
-        method= BeanUtil.getMethod(TestEntity.class,"getName");
+        method= BeanUtils.getMethod(TestEntity.class,"getName");
         System.out.println(System.currentTimeMillis()-start+"ms");
         System.out.println(method.invoke(testEntity).toString());
 
         start=System.currentTimeMillis();
-        method=BeanUtil.getMethod(TestEntity.class,"getName");
+        method= BeanUtils.getMethod(TestEntity.class,"getName");
         System.out.println(System.currentTimeMillis()-start+"ms");
         System.out.println(method.invoke(testEntity).toString());
 
         start=System.currentTimeMillis();
-        method=BeanUtil.getMethod(TestEntity.class,"getName");
+        method= BeanUtils.getMethod(TestEntity.class,"getName");
         System.out.println(System.currentTimeMillis()-start+"ms");
         System.out.println(method.invoke(testEntity).toString());
 
@@ -49,35 +49,35 @@ public class ReflectionTest {
     @Test
     public void testField()throws Throwable{
         long start=System.currentTimeMillis();
-        System.out.println(BeanUtil.<String>getFieldValue(testEntity,"publicStr"));
+        System.out.println(BeanUtils.<String>getFieldValue(testEntity,"publicStr"));
         System.out.println(System.currentTimeMillis()-start+"ms");
 
         start=System.currentTimeMillis();
-        System.out.println(BeanUtil.<String>getFieldValue(testEntity,"publicStr"));
+        System.out.println(BeanUtils.<String>getFieldValue(testEntity,"publicStr"));
         System.out.println(System.currentTimeMillis()-start+"ms");
 
         start=System.currentTimeMillis();
-        System.out.println(BeanUtil.<String>getFieldValue(testEntity,"publicStr"));
+        System.out.println(BeanUtils.<String>getFieldValue(testEntity,"publicStr"));
         System.out.println(System.currentTimeMillis()-start+"ms");
 
         start=System.currentTimeMillis();
-        System.out.println(BeanUtil.<String>getFieldValue(testEntity,"publicStr"));
+        System.out.println(BeanUtils.<String>getFieldValue(testEntity,"publicStr"));
         System.out.println(System.currentTimeMillis()-start+"ms");
 
         start=System.currentTimeMillis();
         for(int i=0;i<Integer.MAX_VALUE;i++)
-            BeanUtil.<String>getFieldValue(testEntity,"publicStr");
+            BeanUtils.<String>getFieldValue(testEntity,"publicStr");
         System.out.println(System.currentTimeMillis()-start+"ms");
     }
     @Test
     public void testThread() throws Throwable{
         long start=System.currentTimeMillis();
-        Class.forName("com.youmu.maven.utils.reflection.BeanUtil");
+        Class.forName("com.youmu.maven.utils.reflection.BeanUtils");
                 Runnable runnable=new Runnable() {
             @Override
             public void run() {
-                BeanDefine bd=BeanUtil.getBeanDefine(TestEntity.class);
-                System.out.println(Thread.currentThread().getName()+ BeanUtil.getBeanDefine(TestEntity.class));
+                BeanDefine bd= BeanUtils.getBeanDefine(TestEntity.class);
+                System.out.println(Thread.currentThread().getName()+ BeanUtils.getBeanDefine(TestEntity.class));
                 count++;
             }
         };

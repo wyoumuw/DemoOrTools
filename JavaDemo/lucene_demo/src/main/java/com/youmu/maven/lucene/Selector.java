@@ -1,7 +1,7 @@
 package com.youmu.maven.lucene;
 
-import com.youmu.maven.utils.StringUtil;
-import com.youmu.maven.utils.reflection.BeanUtil;
+import com.youmu.maven.utils.StringUtils;
+import com.youmu.maven.utils.reflection.BeanUtils;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
@@ -47,8 +47,8 @@ public class Selector{
             SimpleTypeConverter typeConverter=new SimpleTypeConverter();
             for (IndexableField indexableField:fields) {
                 String name=indexableField.name();
-                Field f=BeanUtil.getField(clazz,name);
-                Method method= BeanUtil.getMethod(clazz, StringUtil.toSetterMethodName(name),f.getType());
+                Field f= BeanUtils.getField(clazz,name);
+                Method method= BeanUtils.getMethod(clazz, StringUtils.toSetterMethodName(name),f.getType());
                 method.invoke(t,typeConverter.convertIfNecessary(indexableField.stringValue(),f.getType()));
             }
             list.add(t);
