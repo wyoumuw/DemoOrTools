@@ -1,5 +1,7 @@
 package com.youmu.maven.utils;
 
+import java.util.Random;
+
 /**
  * Created by wyoumuw on 2017/3/28.
  */
@@ -77,5 +79,23 @@ public abstract class StringUtils {
             stringBuilder.append(string).append(splitor);
         }
         return stringBuilder.toString().substring(0,stringBuilder.length()-splitor.length());
+    }
+
+    private static final char[] base = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPQqRrSsTtUuVvWwXYxyZz0123456789".toCharArray();
+
+    /**
+     * generate nonce string
+     * @param len
+     * @return
+     */
+    public static String generateNonceStr(int len){
+        byte[] bytes=new byte[len];
+        new Random().nextBytes(bytes);
+        int baseLen=base.length;
+        char[] out=new char[len];
+        for (int i=0;i<len;i++){
+            out[i]=base[(bytes[i]>>>1)%baseLen];
+        }
+        return String.valueOf(out);
     }
 }

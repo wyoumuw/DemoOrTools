@@ -3,7 +3,7 @@ package com.youmu.maven.utils;
 /**
  * Created by wyoumuw on 2017/3/28.
  */
-public class ArrayUtils {
+public abstract class ArrayUtils {
     public static boolean isEmpty(Object[] array){
         return array==null||array.length==0;
     }

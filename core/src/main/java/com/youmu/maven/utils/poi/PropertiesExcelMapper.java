@@ -1,13 +1,13 @@
 package com.youmu.maven.utils.poi;
 
-import com.youmu.maven.utils.LoggerUtil;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
+import com.youmu.maven.utils.LoggerUtils;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 /**
- * Created by ucmed on 2017/5/9.
+ * Created by youmu on 2017/5/9.
  */
 public class PropertiesExcelMapper<T> extends MapExcelMapper<T>{
 
@@ -25,7 +25,7 @@ public class PropertiesExcelMapper<T> extends MapExcelMapper<T>{
         for (Map.Entry<Object, Object> entry : properties.entrySet()) {
             String key= (String) entry.getKey();
             //print log
-            LoggerUtil.getLogger().debug("maping "+key+" -> "+entry.getValue());
+            LoggerUtils.getLogger().debug("maping "+key+" -> "+entry.getValue());
             if(key.startsWith(_PROP_PREFIX)){
                 super._mappingMap.put((String) entry.getValue(),key.replaceFirst(_PROP_PREFIX,""));
             }else if(key.equals(_CLASS)){

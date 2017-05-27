@@ -1,8 +1,7 @@
 package com.youmu.maven.utils.poi;
 
-import com.youmu.maven.utils.LoggerUtil;
+import com.youmu.maven.utils.LoggerUtils;
 import com.youmu.maven.utils.common.Initializable;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by ucmed on 2017/5/5.
+ * Created by youmu on 2017/5/5.
  */
 public class ExcelParser implements Initializable{
     private final Map<Class,Mapper> _mappers=new HashMap<Class,Mapper>();
@@ -78,7 +77,7 @@ public class ExcelParser implements Initializable{
     public void outToFile(Mapper mapper,List contents,File file) throws  IOException{
         if(!file.exists()){
             if(!file.createNewFile()){
-                LoggerUtil.getLogger().debug("create file "+file.getAbsolutePath()+" failed");
+                LoggerUtils.getLogger().debug("create file "+file.getAbsolutePath()+" failed");
             }
         }
         if(!(mapper instanceof MapExcelMapper)){

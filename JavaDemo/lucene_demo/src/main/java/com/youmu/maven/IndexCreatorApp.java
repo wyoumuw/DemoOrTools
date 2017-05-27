@@ -3,8 +3,8 @@ package com.youmu.maven;
 import com.youmu.maven.dao.impl.BookDaoImpl;
 import com.youmu.maven.dao.utils.MyBatisUtil;
 import com.youmu.maven.entity.Book;
-import com.youmu.maven.support.DocumentConverter;
 import com.youmu.maven.lucene.Indexer;
+import com.youmu.maven.support.DocumentConverter;
 import com.youmu.maven.utils.Environment;
 
 import java.util.List;

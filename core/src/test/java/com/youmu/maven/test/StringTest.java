@@ -81,4 +81,16 @@ public class StringTest {
         System.out.println(apb1==ab1);
         System.out.println(3==2+1);
     }
+    @Test
+    public void genS()throws Exception{
+        char[] s="0123456789abcdef".toCharArray();
+        System.out.print("{");
+        for (int i = 1; i <= s.length; i++) {
+            System.out.print("\'"+s[i-1]+"\'");
+            if(i!=s.length) System.out.print(",");
+            if (0==i%4) System.out.println();
+        }
+        System.out.print("}");
+    }
+
 }

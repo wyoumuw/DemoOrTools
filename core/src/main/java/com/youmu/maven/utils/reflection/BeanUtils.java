@@ -1,11 +1,11 @@
 package com.youmu.maven.utils.reflection;
 
+import com.youmu.maven.utils.cache.Cache;
+import com.youmu.maven.utils.cache.MapCache;
 import com.youmu.maven.utils.reflection.utils.YoumuReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public abstract class BeanUtils {
 
-    private static Map<Class,BeanDefine> cache=new HashMap<Class,BeanDefine>();
+    private static Cache<Class,BeanDefine> cache=new MapCache<Class,BeanDefine>();
 
     private static Lock lock=new ReentrantLock();
 

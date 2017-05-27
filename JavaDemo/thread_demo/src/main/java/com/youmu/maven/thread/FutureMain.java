@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.concurrent.*;
 
 /**
  * Created by wyoumuw on 2017/4/9.
