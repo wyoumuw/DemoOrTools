@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Created by wyoumuw on 2017/3/28.
  */
-public abstract class YoumuReflectionUtil {
+public abstract class YoumuReflectionUtils {
 
 
 

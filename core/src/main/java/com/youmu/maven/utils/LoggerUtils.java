@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by wyoumuw on 2017/5/4.
  */
-public abstract class LoggerUtil {
-    private static final Logger _defaultLogger= LoggerFactory.getLogger(LoggerUtil.class);
+public abstract class LoggerUtils {
+    private static final Logger _defaultLogger= LoggerFactory.getLogger(LoggerUtils.class);
 
 
     public static Logger getLogger(){

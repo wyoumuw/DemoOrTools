@@ -1,6 +1,6 @@
 package com.youmu.maven.thread;
 
-import com.youmu.maven.utils.StringUtil;
+import com.youmu.maven.utils.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -30,7 +30,7 @@ class ReturnCallable implements Callable<String>{
     }
     @Override
     public String call() throws Exception {
-        if(StringUtil.isEmpty(url)) {
+        if(StringUtils.isEmpty(url)) {
             return null;
         }
         StringBuilder sb=new StringBuilder();

@@ -2,7 +2,7 @@ package com.youmu.maven.utils;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class NetUtil {
+public class NetUtils {
 
 	public static String getRealIp(HttpServletRequest req) {
 		String ip = req.getHeader("x-forwarded-for");

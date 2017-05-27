@@ -3,7 +3,7 @@ package com.youmu.maven.utils;
 /**
  * Created by wyoumuw on 2017/3/28.
  */
-public abstract class StringUtil {
+public abstract class StringUtils {
     /**
      * 获得field的get方法名字
      * @param field
@@ -66,10 +66,10 @@ public abstract class StringUtil {
     private static final CharSequence defaultSplitor=",";
 
     public static String join(String[] strings,CharSequence splitor ){
-        if(ArrayUtil.isEmpty(strings)){
+        if(ArrayUtils.isEmpty(strings)){
             return "";
         }
-        if(StringUtil.isEmpty(splitor)){
+        if(StringUtils.isEmpty(splitor)){
             splitor=defaultSplitor;
         }
         StringBuilder stringBuilder=new StringBuilder();

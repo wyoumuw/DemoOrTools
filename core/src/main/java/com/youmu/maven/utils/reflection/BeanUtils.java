@@ -1,6 +1,6 @@
 package com.youmu.maven.utils.reflection;
 
-import com.youmu.maven.utils.reflection.utils.YoumuReflectionUtil;
+import com.youmu.maven.utils.reflection.utils.YoumuReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -13,7 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by wyoumuw on 2017/3/28.
  * 不允许调用非public属性
  */
-public abstract class BeanUtil {
+public abstract class BeanUtils {
 
     private static Map<Class,BeanDefine> cache=new HashMap<Class,BeanDefine>();
 
@@ -61,11 +61,11 @@ public abstract class BeanUtil {
         }
         BeanDefine bd=null;
         //TODO: 没考虑好怎么处理这个锁
-        synchronized (BeanUtil.class) {
+        synchronized (BeanUtils.class) {
             if(cache.containsKey(clazz)&&!override){
                 return cache.get(clazz);
             }
-            bd = new BeanDefine(clazz,clazz.getName(),clazz.getDeclaredConstructors(), YoumuReflectionUtil.getAllFields(clazz),YoumuReflectionUtil.getAllMethods(clazz));
+            bd = new BeanDefine(clazz,clazz.getName(),clazz.getDeclaredConstructors(), YoumuReflectionUtils.getAllFields(clazz), YoumuReflectionUtils.getAllMethods(clazz));
             cache.put(clazz, bd);
         }
         return bd;
@@ -81,7 +81,7 @@ public abstract class BeanUtil {
      */
     public static Method getMethod(Class<?> clazz, String methodName, Class ...args){
         BeanDefine bd=getBeanDefine(clazz);
-        MethodDecorator methodDecorator=bd.getMethods().get(YoumuReflectionUtil.generFullMethodName(methodName,args));
+        MethodDecorator methodDecorator=bd.getMethods().get(YoumuReflectionUtils.generFullMethodName(methodName,args));
         return null==methodDecorator?null:methodDecorator.getMethod();
     }
     /**
@@ -94,7 +94,7 @@ public abstract class BeanUtil {
      */
     public static MethodDecorator getMethodDecorator(Class<?> clazz, String methodName, Class ...args){
         BeanDefine bd=getBeanDefine(clazz);
-        return bd.getMethods().get(YoumuReflectionUtil.generFullMethodName(methodName,args));
+        return bd.getMethods().get(YoumuReflectionUtils.generFullMethodName(methodName,args));
     }
 
 

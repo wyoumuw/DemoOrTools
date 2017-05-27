@@ -1,7 +1,7 @@
 package com.youmu.maven.utils.poi;
 
-import com.youmu.maven.utils.StringUtil;
-import com.youmu.maven.utils.LoggerUtil;
+import com.youmu.maven.utils.StringUtils;
+import com.youmu.maven.utils.LoggerUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
@@ -44,8 +44,8 @@ public class MapExcelMapper<T> extends CommonExcelMapper<T>  implements HeaderMa
         List<String> list=new ArrayList<String>();
         for (Cell cell : header) {
             String fieldName=_mappingMap.get(cell.getStringCellValue());
-            if(StringUtil.isEmpty(fieldName)){
-                LoggerUtil.getLogger().debug("skip column "+cell.getStringCellValue());
+            if(StringUtils.isEmpty(fieldName)){
+                LoggerUtils.getLogger().debug("skip column "+cell.getStringCellValue());
             }
             list.add(fieldName);
         }
