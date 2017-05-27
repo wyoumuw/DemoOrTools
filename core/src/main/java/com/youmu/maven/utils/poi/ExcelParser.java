@@ -1,5 +1,6 @@
 package com.youmu.maven.utils.poi;
 
+import com.youmu.maven.utils.LoggerUtil;
 import com.youmu.maven.utils.common.Initializable;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -7,6 +8,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ public class ExcelParser implements Initializable{
         _mappers.put(targetClass,new MapExcelMapper(mapPair,targetClass));
     }
 
-    public List parse(InputStream inputStream,String sheetName, Class targetClass,int headerRowNum) throws IOException {
+    public List parse(InputStream inputStream,String sheetName, Class targetClass) throws IOException {
         Workbook wb=null;
         try {
             wb = getWorkBook(inputStream);
@@ -49,7 +51,7 @@ public class ExcelParser implements Initializable{
             if (null == mapper) {
                 throw new RuntimeException("未找到类" + targetClass);
             }
-            return parse(sheet,mapper,headerRowNum);
+            return parse(sheet,mapper);
         }finally {
             if(null!=wb) {
                 wb.close();
@@ -57,21 +59,39 @@ public class ExcelParser implements Initializable{
         }
     }
 
-    private  List parse(Sheet sheet,Mapper mapper,int headerRowNum){
+    private  List parse(Sheet sheet,Mapper mapper){
         List list=new ArrayList();
-        if(headerRowNum>=0&&mapper instanceof HeaderMappingMapper) {
-            Row header = sheet.getRow(headerRowNum);
+        if(mapper instanceof HeaderMappingMapper) {
+            HeaderMappingMapper headerMappingMapper= (HeaderMappingMapper) mapper;
+            Row header = sheet.getRow(headerMappingMapper.getHeaderRow());
             ((HeaderMappingMapper) mapper).remapping(header);
         }
+        ExcelMapper excelMapper= (ExcelMapper) mapper;
         //begin parse from head+1 row
-        for (int i=headerRowNum+1;i<=sheet.getLastRowNum();i++){
+        for (int i=excelMapper.getContentMarginTop();i<=sheet.getLastRowNum();i++){
             Row row= sheet.getRow(i);
             list.add(mapper.convert(row));
         }
         return list;
     }
 
+    public void outToFile(Mapper mapper,List contents,File file) throws  IOException{
+        if(!file.exists()){
+            if(!file.createNewFile()){
+                LoggerUtil.getLogger().debug("create file "+file.getAbsolutePath()+" failed");
+            }
+        }
+        if(!(mapper instanceof MapExcelMapper)){
+            throw new RuntimeException("");
+        }
+        Workbook workbook=createWorkBook();
+    }
+
     private Workbook getWorkBook(InputStream inputStream) throws IOException {
         return new XSSFWorkbook(inputStream);
+    }
+
+    private Workbook createWorkBook(){
+        return new XSSFWorkbook();
     }
 }

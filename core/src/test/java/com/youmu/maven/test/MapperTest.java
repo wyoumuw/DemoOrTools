@@ -36,7 +36,7 @@ public class MapperTest {
         FileInputStream inputStream=new FileInputStream("E:\\a.xlsx");
         ExcelParser parser=new ExcelParser();
         parser.addMapper(new MapExcelMapper(mapPair,TestEntity.class));
-        List list=parser.parse(inputStream,"sheet1",TestEntity.class,0);
+        List list=parser.parse(inputStream,"sheet1",TestEntity.class);
         for (Object o : list) {
             System.out.println(o);
         }
@@ -51,7 +51,7 @@ public class MapperTest {
         Properties props=new Properties();
         props.load(new InputStreamReader(TestEntity.class.getClassLoader().getResourceAsStream("TestEntity.properties")));
         parser.addMapper(new PropertiesExcelMapper(props));
-        List list=parser.parse(inputStream,"sheet1",TestEntity.class,0);
+        List list=parser.parse(inputStream,"sheet1",TestEntity.class);
         for (Object o : list) {
             System.out.println(o);
         }

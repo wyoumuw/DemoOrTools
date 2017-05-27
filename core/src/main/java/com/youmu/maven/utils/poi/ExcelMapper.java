@@ -9,4 +9,5 @@ import java.util.Map;
  * Created by ucmed on 2017/5/5.
  */
 public abstract class ExcelMapper<T> implements Mapper<Row,T> {
+    public abstract  Integer getContentMarginTop();
 }

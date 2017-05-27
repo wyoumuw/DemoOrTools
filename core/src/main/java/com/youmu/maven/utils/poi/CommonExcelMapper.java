@@ -19,6 +19,8 @@ public class CommonExcelMapper<T> extends ExcelMapper<T> {
     protected List<MethodDecorator> methods;
     protected Class<T> clazz;
     protected List<String> mappingList;
+    protected Integer _contentMarginTop=0;
+
 
     protected CommonExcelMapper() {
 
@@ -95,5 +97,10 @@ public class CommonExcelMapper<T> extends ExcelMapper<T> {
     @Override
     public Class getTargetClass() {
         return clazz;
+    }
+
+    @Override
+    public Integer getContentMarginTop() {
+        return this._contentMarginTop;
     }
 }

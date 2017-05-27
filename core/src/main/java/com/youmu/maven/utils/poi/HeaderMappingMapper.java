@@ -7,4 +7,5 @@ import org.apache.poi.ss.usermodel.Row;
  */
 public interface HeaderMappingMapper {
     void remapping(Row header);
+    Integer getHeaderRow();
 }

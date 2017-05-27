@@ -10,12 +10,30 @@ import java.util.*;
 /**
  * Created by ucmed on 2017/5/9.
  */
+
+/**
+ * 必须有header
+ *
+ * @param <T>
+ */
 public class MapExcelMapper<T> extends CommonExcelMapper<T>  implements HeaderMappingMapper {
     protected Map<String,String> _mappingMap;
 
+    protected Integer _headerRow=0;
+
     public MapExcelMapper( Map<String, String> mappingMap, Class<T> clazz) {
+        this(mappingMap,clazz,0);
+
+    }
+
+    public MapExcelMapper( Map<String, String> mappingMap, Class<T> clazz,Integer headerMarginTop) {
+        this(mappingMap,clazz,headerMarginTop,0);
+    }
+
+    public MapExcelMapper( Map<String, String> mappingMap, Class<T> clazz,Integer headerMarginTop,Integer headerMagrinContent) {
         this._mappingMap = mappingMap;
         super.clazz=clazz;
+        setHeaderMarginTop(headerMarginTop,headerMagrinContent);
     }
 
     protected MapExcelMapper() {
@@ -33,5 +51,15 @@ public class MapExcelMapper<T> extends CommonExcelMapper<T>  implements HeaderMa
         }
         super.mappingList=list;
         init();
+    }
+
+    @Override
+    public Integer getHeaderRow() {
+        return _headerRow;
+    }
+
+    protected void setHeaderMarginTop(Integer headerMarginTop,Integer headerMagrinContent){
+        this._headerRow=headerMarginTop;
+        this._contentMarginTop=headerMarginTop+headerMagrinContent+1;
     }
 }
