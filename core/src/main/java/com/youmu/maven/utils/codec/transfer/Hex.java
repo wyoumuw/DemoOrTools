@@ -10,7 +10,7 @@ public class Hex {
                                        '8','9','a','b',
                                        'c','d','e','f'};
     public static char[] binToHex(byte[] bin){
-        char[] result=new char[bin.length<<2];
+        char[] result=new char[bin.length<<1];
         for (int i = 0,j=0; i < bin.length; i++) {
             result[j++]=CHAR_HEX[(0xF0&bin[i])>>>4];
             result[j++]=CHAR_HEX[(0x0F&bin[i])];
