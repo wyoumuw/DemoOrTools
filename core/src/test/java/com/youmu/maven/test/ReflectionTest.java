@@ -165,4 +165,14 @@ public class ReflectionTest {
         }
         System.out.println(System.currentTimeMillis()-start+"ms");
     }
+
+    @Test
+    public void lambdaTest() throws Throwable{
+
+
+
+    }
+    interface I{
+        void print(String s);
+    }
 }

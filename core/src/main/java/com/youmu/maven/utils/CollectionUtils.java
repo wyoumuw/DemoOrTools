@@ -14,4 +14,11 @@ public abstract class CollectionUtils {
     public static boolean isEmpty(Map map) {
         return null==map||map.isEmpty();
     }
+
+    public static <K,V> void copy(Map<K,V> src,Map<K,V> dist){
+        if(null==src||null==dist){return;}
+        for (Map.Entry<K, V> entry : src.entrySet()) {
+            dist.put(entry.getKey(),entry.getValue());
+        }
+    }
 }

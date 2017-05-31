@@ -2,6 +2,7 @@ package com.youmu.maven.test;
 
 import org.junit.Test;
 
+import javax.activation.MimetypesFileTypeMap;
 import java.security.MessageDigest;
 
 /**
@@ -93,4 +94,8 @@ public class StringTest {
         System.out.print("}");
     }
 
+    @Test
+    public void contentType()throws Exception{
+        System.out.println(new MimetypesFileTypeMap().getContentType("E:\\home\\xxx.jpg"));
+    }
 }

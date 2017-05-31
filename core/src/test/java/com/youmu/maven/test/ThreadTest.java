@@ -2,6 +2,7 @@ package com.youmu.maven.test;
 
 import org.junit.Test;
 
+import java.util.List;
 import java.util.concurrent.*;
 
 /**
@@ -152,7 +153,6 @@ public class ThreadTest {
 
     @Test
     public void test6() throws  Exception{
-    CopyOnWriteArrayList a=new CopyOnWriteArrayList();
     }
 }
 
