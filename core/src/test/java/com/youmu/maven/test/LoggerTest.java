@@ -18,4 +18,17 @@ public class LoggerTest {
         System.out.println(new BigDecimal(a).subtract(new BigDecimal(b)).floatValue());
 
     }
+
+
+    @Test
+    public void log1(){
+        StackTraceElement[] elements= Thread.currentThread().getStackTrace();
+        for (StackTraceElement element : elements) {
+            System.out.println(element.getClassName());
+        }
+    }
+
+    public static void main(String[] args) {
+        LoggerUtils.getLogger().debug("dasd");
+    }
 }

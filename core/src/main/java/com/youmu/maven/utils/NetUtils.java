@@ -1,7 +1,9 @@
 package com.youmu.maven.utils;
 
+import com.youmu.maven.utils.builder.MapBuilder;
 import com.youmu.maven.utils.model.NetResult;
 import com.youmu.maven.utils.model.RequestMethod;
+import com.youmu.maven.utils.model.StringNetResult;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.net.ssl.*;
@@ -15,8 +17,10 @@ import java.security.NoSuchProviderException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@Deprecated
 public abstract class NetUtils {
 
 	public static String makeUrl(String baseUrl, Map<String, String> params) {
@@ -46,12 +50,12 @@ public abstract class NetUtils {
 	public static NetResult post(String url, Map<String, String> params, byte[] out){
 		return request(url,RequestMethod.POST,null,params,out);
 	}
+
 	public static NetResult request(String url, RequestMethod method,final Map<String,String> header,final Map<String, String> params, byte[] out) {
 		url = makeUrl(url, params);
 		HttpURLConnection connection = null;
 		InputStream inputStream = null;
-		InputStreamReader inputStreamReader = null;
-		BufferedReader bufferedReader = null;
+		ByteArrayOutputStream baos=null;
 		NetResult result = new NetResult();
 		try {
 			connection = getConnection(url);
@@ -72,19 +76,24 @@ public abstract class NetUtils {
 			}
 			// 将返回的输入流转换成字符串
 			inputStream = connection.getInputStream();
-			StringBuilder sb = new StringBuilder();
 			if (null != inputStream) {
-				inputStreamReader = new InputStreamReader(inputStream, "utf-8");
-				bufferedReader = new BufferedReader(inputStreamReader);
-				String str = null;
-
-				while ((str = bufferedReader.readLine()) != null) {
-					sb.append(str);
+				baos=new ByteArrayOutputStream();
+				byte[] buffer=new byte[512];
+				int len=-1;
+				while (-1!=(len=inputStream.read(buffer))) {
+					baos.write(buffer,0,len);
 				}
 			}
+			Map<String,List<String>> map=connection.getHeaderFields();
+			//TODO 可能要修改成String数组
+			Map<String,String> headerMap=new HashMap<>();
+ 			for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+				headerMap.put(entry.getKey(),(null==entry.getValue()||0==entry.getValue().size())?null:entry.getValue().get(0));
+			}
+			result.setHeader(headerMap);
 			result.setCode(connection.getResponseCode());
 			result.setMsg(connection.getResponseMessage());
-			result.setContent(sb.toString());
+			result.setContent(baos.toByteArray());
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -92,15 +101,8 @@ public abstract class NetUtils {
 				connection.disconnect();
 			}
 			try {
-				if (null != bufferedReader) {
-					bufferedReader.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			try {
-				if (null != inputStreamReader) {
-					inputStreamReader.close();
+				if (null != baos) {
+					baos.close();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

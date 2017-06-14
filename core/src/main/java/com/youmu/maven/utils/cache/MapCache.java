@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by dehua.lai on 2017/5/26.
+ * Created by youmu on 2017/5/26.
  */
 public class MapCache<K,V> implements Cache<K,V>{
 
@@ -13,6 +13,12 @@ public class MapCache<K,V> implements Cache<K,V>{
     public V get(K key) {
         return map.get(key);
     }
+
+    @Override
+    public V get(K key, Class<V> clazz) {
+        return get(key);
+    }
+
     @Override
     public V put(K key, V value) {
         return map.put(key,value);

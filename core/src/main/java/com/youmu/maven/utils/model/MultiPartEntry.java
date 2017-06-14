@@ -3,7 +3,7 @@ package com.youmu.maven.utils.model;
 import java.io.File;
 
 /**
- * Created by dehua.lai on 2017/5/31.
+ * Created by youmu on 2017/5/31.
  */
 public class MultiPartEntry {
     private Object entry;

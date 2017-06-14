@@ -1,7 +1,7 @@
 package com.youmu.maven.utils.codec.transfer;
 
 /**
- * Created by dehua.lai on 2017/5/27.
+ * Created by youmu on 2017/5/27.
  */
 public class Hex {
 

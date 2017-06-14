@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by dehua.lai on 2017/5/31.
+ * Created by youmu on 2017/5/31.
  */
 public class MapBuilder<K,V>{
     private HashMap<K,V> hashMap;
