@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * Created by wyoumuw on 2017/4/13.
@@ -153,6 +155,36 @@ public class ThreadTest {
 
     @Test
     public void test6() throws  Exception{
+    }
+
+    @Test
+    public void testgc() throws InterruptedException {
+        String c="123";
+        System.out.println("pre");
+        int []a=new int[20];
+        System.out.println("create");
+        a=null;
+        System.gc();
+        //Thread.sleep(10000);
+        System.out.println("wake up");
+    }
+
+    @Test
+    public void closePackage(){
+       Runnable runnable= (Runnable) new Function(){
+
+            @Override
+            public Object apply(Object o) {
+                final String wwaaa="youmu";
+                return new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println(wwaaa);
+                    }
+                };
+            }
+        }.apply(1);
+       runnable.run();
     }
 }
 

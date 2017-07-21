@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Created by wyoumuw on 2017/5/4.
+ * 太慢了
  */
+@Deprecated
 public abstract class LoggerUtils {
     private static final Logger _defaultLogger= LoggerFactory.getLogger(LoggerUtils.class);
 

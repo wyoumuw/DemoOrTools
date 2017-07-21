@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Created by youmu on 2017/5/31.
  */
-public class MapBuilder<K,V>{
+public class MapBuilder<K,V> implements Builder<Map<K,V>>{
     private HashMap<K,V> hashMap;
     public MapBuilder() {
         this.hashMap = new HashMap<>();
@@ -20,8 +20,8 @@ public class MapBuilder<K,V>{
         return this;
     }
 
-    public Map build(Class<? extends Map> mapClazz){
-        Map map=null;
+    public Map<K, V> build(Class<? extends Map> mapClazz){
+        Map<K, V> map=null;
         try {
           map= mapClazz.newInstance();
           CollectionUtils.copy(this.hashMap,map);
@@ -31,7 +31,12 @@ public class MapBuilder<K,V>{
         return map;
     }
 
-    public HashMap<K,V> getRaw(){
+    @Override
+    public Map<K, V> build() {
+        return build(HashMap.class);
+    }
+
+    public Map<K,V> getRaw(){
         return this.hashMap;
     }
 }

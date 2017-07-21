@@ -14,4 +14,6 @@ public enum DigestMethod {
     public String getDigest() {
         return digest;
     }
+
+
 }

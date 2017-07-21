@@ -1,5 +1,9 @@
 package com.youmu.maven.utils;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by wyoumuw on 2017/3/28.
  */
@@ -38,5 +42,9 @@ public abstract class ArrayUtils {
 
     public static boolean isEmpty(short[] array){
         return array==null||array.length==0;
+    }
+
+    public static <V> void copy(List<V> raw,List<V> dist) throws NullPointerException{
+        Collections.copy(dist,raw);
     }
 }
